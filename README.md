@@ -79,3 +79,38 @@ The system is pre-configured with these demo IDs for testing:
 
 ## 🛡️ License
 Open Source.
+
+## 🚀 Deployment on Raspberry Pi
+
+This project includes a **One-Click Setup Script** to automate the entire installation process on a Raspberry Pi.
+
+### 1. Automated Setup (Recommended)
+This script will update the system, install dependencies, pull the latest code, and configure auto-start/auto-updates.
+
+1.  **Preparation**: Copy the project files to your Raspberry Pi (or clone the repo).
+2.  **Run the Script**:
+    ```bash
+    chmod +x setup_pi.sh
+    ./setup_pi.sh
+    ```
+3.  **Completion**: The Pi will reboot automatically. Upon restart, the Attendance System will launch.
+
+*Note: If the folder is not a git repository (e.g., copied via USB), the script will automatically initialize it and link it to the official repository to enable future updates.*
+
+### 2. Manual Setup (Alternative)
+If you prefer to configure it manually:
+
+1.  **Permissions**:
+    ```bash
+    chmod +x launcher.sh autoupdate_watchdog.sh
+    ```
+2.  **Auto-Start**:
+    Add the following to your `~/.bashrc`:
+    ```bash
+    /path/to/attendance-system/launcher.sh
+    ```
+3.  **Auto-Update**:
+    Add the following to your `crontab -e`:
+    ```bash
+    * * * * * cd /path/to/attendance-system && ./autoupdate_watchdog.sh >> /tmp/attendance_update.log 2>&1
+    ```
